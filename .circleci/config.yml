@@ -65,10 +65,6 @@ jobs:
             bundle install --local --path=./vendor/cache -j4
 
       - run:
-          name: rubocop
-          command: bundle exec rubocop
-
-      - run:
           name: rake test
           command: bundle exec rake test
 
