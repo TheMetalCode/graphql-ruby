@@ -1,8 +1,21 @@
 # graphql-ruby
 
+Shamelessly borrowed from [howtographql](https://github.com/howtographql/graphql-ruby) for the purposes of trying out Apollo Engine/Platform with a ruby server implementation.
+
+https://sample-graphql-ruby.herokuapp.com/
+
+
 ## Installation
 
-Install dependencies:
+Install node dependencies:
+
+```
+nvm use
+npm install -g yarn
+yarn install
+```
+
+Install ruby dependencies:
 
 ```
 bundle install
@@ -125,4 +138,3 @@ mutation {
   }
 }
 ```
-
