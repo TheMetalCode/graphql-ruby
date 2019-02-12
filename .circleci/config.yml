@@ -1,0 +1,111 @@
+version: 2.1
+
+executors:
+  build_container:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/ruby:2.6.1-node
+
+jobs:
+  set_up_workspace:
+    executor: build_container
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - ruby-cache-v3-{{ checksum "Gemfile" }}
+            - ruby-cache-v3
+
+      - run:
+          name: Install ruby dependencies
+          command: bundle check --path=vendor/cache || bundle install --path=vendor/cache --jobs=4 --retry=3
+
+      - save_cache:
+          key: ruby-cache-v3-{{ checksum "Gemfile" }}
+          paths:
+            - vendor/bundle
+            - vendor/cache
+
+      - restore_cache:
+          keys:
+            - yarn-cache-v2-{{ checksum "yarn.lock" }}
+            - yarn-cache-v2-
+
+      - run:
+          name: Install yarn dependencies
+          command: yarn install
+
+      - save_cache:
+          key: yarn-cache-v2-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: db prep
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:migrate
+            bundle exec rails db:seed
+
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - workspace
+
+  unit_tests:
+    executor: build_container
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run:
+          name: Load bundle from workspace
+          command: |
+            bundle install --local --path=./vendor/cache -j4
+
+      - run:
+          name: rake test
+          command: bundle exec rake test
+
+  schema_check:
+    executor: build_container
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run:
+          name: Load bundle from workspace
+          command: |
+            bundle install --local --path=./vendor/cache -j4
+
+      - run:
+          name: Starting server
+          command: bundle exec rails server
+          background: true
+
+      - run:
+          name: apollo service:check
+          command: sleep 5 && npx apollo service:check
+
+      - run:
+          name: apollo service:push if master
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npx apollo service:push
+            else
+              echo "Not master, not pushing"
+            fi
+
+workflows:
+  version: 2.1
+
+  build_and_test:
+    jobs:
+      - set_up_workspace
+      - unit_tests:
+          requires:
+            - set_up_workspace
+      - schema_check:
+          requires:
+            - set_up_workspace

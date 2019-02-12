@@ -1,5 +1,8 @@
 {
   "name": "graphql-ruby",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "apollo": "^2.4.4"
+  }
 }
