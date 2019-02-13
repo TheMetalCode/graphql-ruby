@@ -8,10 +8,10 @@ end
 ruby '2.6.1'
 
 gem 'bcrypt'
+gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.0'
-gem 'sqlite3'
 gem 'validate_url'
 
 gem 'graphiql-rails', '1.5.0'
