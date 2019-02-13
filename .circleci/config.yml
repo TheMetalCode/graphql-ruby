@@ -5,6 +5,7 @@ executors:
     working_directory: ~/workspace
     docker:
       - image: circleci/ruby:2.6.1-node
+      - image: circleci/postgres:11.1-alpine
 
 jobs:
   set_up_workspace:
