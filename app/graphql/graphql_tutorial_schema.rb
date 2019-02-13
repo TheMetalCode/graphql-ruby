@@ -1,6 +1,9 @@
+require "apollo/tracing"
+
 class GraphqlTutorialSchema < GraphQL::Schema
   query Types::QueryType
   mutation Types::MutationType
+  use ApolloTracing.new
 
   def self.resolve_type(_type, object, _ctx)
     type_class = "::Types::#{object.class}Type".safe_constantize
