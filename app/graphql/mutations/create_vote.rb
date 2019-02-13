@@ -1,6 +1,6 @@
 module Mutations
   class CreateVote < BaseMutation
-    argument :link_id, ID, required: false
+    argument :link_id, ID, required: true
 
     type Types::VoteType
 
