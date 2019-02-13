@@ -13,7 +13,6 @@ gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.0'
-gem 'scout_apm'
 gem 'validate_url'
 
 gem 'graphiql-rails', '1.5.0'
