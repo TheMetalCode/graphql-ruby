@@ -44,13 +44,6 @@ jobs:
           paths:
             - node_modules
 
-      - run:
-          name: db prep
-          command: |
-            bundle exec rails db:create
-            bundle exec rails db:migrate
-            bundle exec rails db:seed
-
       - persist_to_workspace:
           root: ~/
           paths:
@@ -68,6 +61,22 @@ jobs:
             bundle install --local --path=./vendor/cache -j4
 
       - run:
+          name: Wait for database container
+          command: |
+            until `nc -z 0.0.0.0 5432`; do
+            echo 'Waiting for db container...'
+              sleep 1
+            done
+            echo 'db container is up'
+
+      - run:
+          name: db prep
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:migrate
+            bundle exec rails db:seed
+
+      - run:
           name: rake test
           command: bundle exec rake test
 
@@ -81,6 +90,22 @@ jobs:
           name: Load bundle from workspace
           command: |
             bundle install --local --path=./vendor/cache -j4
+
+      - run:
+          name: Wait for database container
+          command: |
+            until `nc -z 0.0.0.0 5432`; do
+            echo 'Waiting for db container...'
+              sleep 1
+            done
+            echo 'db container is up'    
+
+      - run:
+          name: db prep
+          command: |
+            bundle exec rails db:create
+            bundle exec rails db:migrate
+            bundle exec rails db:seed
 
       - run:
           name: Starting server
