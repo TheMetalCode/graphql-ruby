@@ -6,6 +6,8 @@ executors:
     docker:
       - image: circleci/ruby:2.6.1-node
       - image: circleci/postgres:11.1-alpine
+        environment:
+            POSTGRES_USER: circleci
 
 jobs:
   set_up_workspace:
