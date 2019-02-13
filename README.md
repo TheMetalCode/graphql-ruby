@@ -7,6 +7,13 @@ https://sample-graphql-ruby.herokuapp.com/
 
 ## Installation
 
+Install postgresql:
+
+```
+brew install postgresql
+brew services start postgresql
+```
+
 Install node dependencies:
 
 ```
