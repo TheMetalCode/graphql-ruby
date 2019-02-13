@@ -1,4 +1,5 @@
 class GraphqlTutorialSchema < GraphQL::Schema
+  use GraphQL::Tracing::ScoutTracing
   query Types::QueryType
   mutation Types::MutationType
 
