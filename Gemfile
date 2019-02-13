@@ -15,6 +15,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.0'
 gem 'validate_url'
 
+gem 'apollo-tracing'
 gem 'graphiql-rails', '1.5.0'
 gem 'graphql'
 gem 'graphql-query-resolver'
@@ -22,6 +23,7 @@ gem 'search_object'
 gem 'search_object_graphql'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
   gem 'rubocop'
 end

@@ -44,6 +44,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    apollo-tracing (1.6.0)
+      graphql (>= 1.7.0, < 2)
     arel (9.0.0)
     ast (2.4.0)
     bcrypt (3.1.12)
@@ -52,6 +54,10 @@ GEM
     byebug (10.0.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
+    dotenv (2.6.0)
+    dotenv-rails (2.6.0)
+      dotenv (= 2.6.0)
+      railties (>= 3.2, < 6.0)
     erubi (1.8.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -176,8 +182,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  apollo-tracing
   bcrypt
   byebug
+  dotenv-rails
   factory_bot_rails
   graphiql-rails (= 1.5.0)
   graphql
