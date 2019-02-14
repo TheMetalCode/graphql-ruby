@@ -3,7 +3,7 @@ require "json"
 require_relative 'config/environment'
 
 main_port = ENV.fetch("PORT") { 4000 }
-proxy_port = main_port.to_i + 1
+proxy_port = ENV.fetch("APOLLO_ENGINE_PROXY_PORT").to_i
 
 apollo_tracing_config = {
   apiKey: ENV.fetch("ENGINE_API_KEY"),
@@ -11,7 +11,7 @@ apollo_tracing_config = {
   origins: [
     {
       http: {
-        url: "http://localhost:#{main_port}"
+        url: "http://localhost:#{main_port}/graphql"
       }
     }
   ],
