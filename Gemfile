@@ -27,7 +27,6 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
   gem 'rubocop'
-  gem 'pry'
 end
 
 group :development do
