@@ -96,7 +96,7 @@ jobs:
           command: |
             mv schema.graphql schema_old.graphql
             bundle exec rake graphql:schema:dump
-            bundle exec graphql-schema_comparator verify schema_old.graphql schema.graphql      
+            bundle exec graphql-schema_comparator verify schema_old.graphql schema.graphql
 
   schema_check:
     executor: build_container
@@ -153,5 +153,8 @@ workflows:
           requires:
             - set_up_workspace
       - schema_check:
+          requires:
+            - set_up_workspace
+      - graphql_schema_comparator:
           requires:
             - set_up_workspace
