@@ -19,6 +19,7 @@ gem 'apollo-tracing'
 gem 'graphiql-rails', '1.5.0'
 gem 'graphql'
 gem 'graphql-query-resolver'
+gem 'graphql-schema_comparator', github: 'TheMetalCode/graphql-schema_comparator', branch: 'ci_verify'
 gem 'search_object'
 gem 'search_object_graphql'
 
@@ -26,6 +27,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platforms: %i(mri mingw x64_mingw)
   gem 'rubocop'
+  gem 'pry'
 end
 
 group :development do

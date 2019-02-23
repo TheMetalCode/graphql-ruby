@@ -80,6 +80,24 @@ jobs:
           name: rake test
           command: bundle exec rake test
 
+  graphql_schema_comparator:
+    executor: build_container
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run:
+          name: Load bundle from workspace
+          command: |
+            bundle install --local --path=./vendor/cache -j4
+
+      - run:
+          name: graphql-schema_comparator
+          command: |
+            mv schema.graphql schema_old.graphql
+            bundle exec rake graphql:schema:dump
+            bundle exec graphql-schema_comparator verify schema_old.graphql schema.graphql      
+
   schema_check:
     executor: build_container
     steps:
@@ -98,7 +116,7 @@ jobs:
             echo 'Waiting for db container...'
               sleep 1
             done
-            echo 'db container is up'    
+            echo 'db container is up'
 
       - run:
           name: db prep

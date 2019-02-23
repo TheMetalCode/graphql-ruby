@@ -23,5 +23,6 @@
 .byebug_history
 
 graphql.json
+schema_old.json
 
 .env
