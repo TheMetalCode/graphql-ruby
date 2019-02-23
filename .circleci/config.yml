@@ -96,7 +96,7 @@ jobs:
           command: |
             mv schema.graphql schema_old.graphql
             bundle exec rake graphql:schema:dump
-            bundle exec graphql-schema_comparator verify schema_old.graphql schema.graphql
+            bundle exec schema_comparator verify schema_old.graphql schema.graphql
 
   schema_check:
     executor: build_container
