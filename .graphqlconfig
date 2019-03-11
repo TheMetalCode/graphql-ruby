@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "graphql-ruby": {
+      "schemaPath": "schema.json",
+      "extensions": {
+        "endpoints": {
+          "prod": "https://sample-graphql-ruby-proxy.herokuapp.com/graphql",
+          "dev": "http://localhost:4000/graphql"
+        }
+      }
+    }
+  }
+}

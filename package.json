@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "apollo": "^2.5.0"
+    "apollo": "^2.5.0",
+    "graphql-cli": "^3.0.11"
   }
 }
